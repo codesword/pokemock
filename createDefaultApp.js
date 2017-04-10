@@ -10,6 +10,28 @@ function createDefaultApp( api, options ) {
   options = options || {};
   var app = express();
 
+  var forceSSL = function (req, res, next) {
+    if (req.headers['x-forwarded-proto'] === 'http') {
+      return res.redirect(301, ['https://', req.get('Host'), req.url].join(''));
+    }
+    return next();
+  };
+  app.get('/', function (req, res) {
+    res.json({});
+  });
+
+  app.get('/healthz', function (req, res) {
+    res.json({});
+  });
+
+  app.get('/.well-known/acme-challenge/_selftest', (req, res) => {
+    res.json({});
+  });
+
+  if (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'staging') {
+    app.use(forceSSL);
+  }
+
   app.get( '/api-docs', pokemock.apiDocs( api ) );
   app.use( '/ui', pokemock.ui );
 
@@ -39,6 +61,8 @@ function createDefaultApp( api, options ) {
       generate2.summary,
       generate2.label,
       generate2.price,
+      generate2.created_at,
+      generate2.updated_at,
       generate.string,
       generate.number,
       generate.integer,
