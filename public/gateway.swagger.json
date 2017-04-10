@@ -1,0 +1,1116 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Entranic Gateway",
+    "description": "Entranic Gateway API consists of all the endpoints\nexposed by entranic services.",
+    "version": "version not set"
+  },
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/v1/authorize": {
+      "post": {
+        "operationId": "Authorize",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/authorizationAuthorizeResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/authorizationAuthorizeRequest"
+            }
+          }
+        ],
+        "tags": [
+          "AuthorizationSvc"
+        ]
+      }
+    },
+    "/v1/fares": {
+      "get": {
+        "operationId": "ListFares",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/scheduleFares"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "terminal_id",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "vehicle_type_id",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ScheduleSvc"
+        ]
+      }
+    },
+    "/v1/fares/{id}": {
+      "get": {
+        "operationId": "GetFare",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/scheduleFareResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ScheduleSvc"
+        ]
+      }
+    },
+    "/v1/permissions": {
+      "get": {
+        "operationId": "ListPermissions",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/authorizationPermissions"
+            }
+          }
+        },
+        "tags": [
+          "AuthorizationSvc"
+        ]
+      },
+      "put": {
+        "operationId": "AlterPermissions",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/authorizationEmpty"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/authorizationAlterPermissionsRequest"
+            }
+          }
+        ],
+        "tags": [
+          "AuthorizationSvc"
+        ]
+      }
+    },
+    "/v1/permissions/{id}": {
+      "get": {
+        "summary": "Get a single user permission",
+        "operationId": "GetPermission",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/authorizationPermission"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "AuthorizationSvc"
+        ]
+      }
+    },
+    "/v1/permissions/{permission_id}/roles": {
+      "put": {
+        "operationId": "AssignRolesToPermission",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/authorizationEmpty"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "permission_id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/authorizationRolesToPermissionRequest"
+            }
+          }
+        ],
+        "tags": [
+          "AuthorizationSvc"
+        ]
+      }
+    },
+    "/v1/roles": {
+      "get": {
+        "operationId": "ListRoles",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/authorizationRoles"
+            }
+          }
+        },
+        "tags": [
+          "AuthorizationSvc"
+        ]
+      },
+      "post": {
+        "operationId": "CreateRole",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/authorizationRole"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/authorizationRole"
+            }
+          }
+        ],
+        "tags": [
+          "AuthorizationSvc"
+        ]
+      },
+      "put": {
+        "operationId": "UpdateRole",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/authorizationRole"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/authorizationRole"
+            }
+          }
+        ],
+        "tags": [
+          "AuthorizationSvc"
+        ]
+      }
+    },
+    "/v1/roles/{id}": {
+      "get": {
+        "operationId": "GetRole",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/authorizationRole"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "AuthorizationSvc"
+        ]
+      }
+    },
+    "/v1/roles/{role_id}/permissions": {
+      "put": {
+        "operationId": "AssignPermissionsToRole",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/authorizationEmpty"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "role_id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/authorizationPermissionsToRoleRequest"
+            }
+          }
+        ],
+        "tags": [
+          "AuthorizationSvc"
+        ]
+      }
+    },
+    "/v1/roles/{role_id}/users": {
+      "put": {
+        "operationId": "AssignUsersToRole",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/authorizationEmpty"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "role_id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/authorizationUsersToRoleRequest"
+            }
+          }
+        ],
+        "tags": [
+          "AuthorizationSvc"
+        ]
+      }
+    },
+    "/v1/routes": {
+      "get": {
+        "operationId": "ListRoutes",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/scheduleRoutes"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "departure_terminal_id",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "arrival_terminal_id",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ScheduleSvc"
+        ]
+      }
+    },
+    "/v1/routes/{id}": {
+      "get": {
+        "operationId": "GetRoute",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/scheduleRoute"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ScheduleSvc"
+        ]
+      }
+    },
+    "/v1/schedules": {
+      "get": {
+        "operationId": "ListSchedule",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/scheduleSchedules"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "departure_terminal_id",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "arrival_terminal_id",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "vehicle_type_id",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ScheduleSvc"
+        ]
+      }
+    },
+    "/v1/schedules/{id}": {
+      "get": {
+        "operationId": "GetSchedule",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/scheduleSchedule"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ScheduleSvc"
+        ]
+      }
+    },
+    "/v1/terminals": {
+      "get": {
+        "operationId": "ListTerminals",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/terminalTerminals"
+            }
+          }
+        },
+        "tags": [
+          "TerminalSvc"
+        ]
+      },
+      "post": {
+        "operationId": "CreateTerminal",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/terminalTerminal"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/terminalTerminal"
+            }
+          }
+        ],
+        "tags": [
+          "TerminalSvc"
+        ]
+      }
+    },
+    "/v1/terminals/{id}": {
+      "get": {
+        "operationId": "GetTerminal",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/terminalTerminal"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "TerminalSvc"
+        ]
+      },
+      "delete": {
+        "operationId": "DeleteTerminal",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/terminalEmpty"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "TerminalSvc"
+        ]
+      },
+      "put": {
+        "operationId": "updateTerminal",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/terminalTerminal"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/terminalTerminal"
+            }
+          }
+        ],
+        "tags": [
+          "TerminalSvc"
+        ]
+      }
+    },
+    "/v1/terminals/{terminal_id}/assign": {
+      "put": {
+        "operationId": "AssignTerminalToManager",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/terminalEmpty"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "terminal_id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/terminalTerminalAssignRequest"
+            }
+          }
+        ],
+        "tags": [
+          "TerminalSvc"
+        ]
+      }
+    },
+    "/v1/users/{user_id}/roles": {
+      "put": {
+        "operationId": "AssignRolesToUser",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/authorizationEmpty"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/authorizationRolesToUserRequest"
+            }
+          }
+        ],
+        "tags": [
+          "AuthorizationSvc"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "authorizationAlterPermissionsRequest": {
+      "type": "object",
+      "properties": {
+        "names": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "authorizationAuthorizeRequest": {
+      "type": "object",
+      "properties": {
+        "user_id": {
+          "type": "string"
+        },
+        "method": {
+          "type": "string"
+        }
+      }
+    },
+    "authorizationAuthorizeResponse": {
+      "type": "object",
+      "properties": {
+        "authorized": {
+          "type": "boolean",
+          "format": "boolean"
+        }
+      }
+    },
+    "authorizationEmpty": {
+      "type": "object"
+    },
+    "authorizationID": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "title": "Unique identifier for permissions"
+        }
+      },
+      "title": "Input object"
+    },
+    "authorizationPermission": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "created_at": {
+          "type": "string"
+        },
+        "updated_at": {
+          "type": "string"
+        }
+      }
+    },
+    "authorizationPermissions": {
+      "type": "object",
+      "properties": {
+        "values": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/authorizationPermission"
+          }
+        }
+      }
+    },
+    "authorizationPermissionsToRoleRequest": {
+      "type": "object",
+      "properties": {
+        "role_id": {
+          "type": "string"
+        },
+        "permission_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "authorizationRole": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "created_at": {
+          "type": "string"
+        },
+        "updated_at": {
+          "type": "string"
+        }
+      }
+    },
+    "authorizationRoles": {
+      "type": "object",
+      "properties": {
+        "values": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/authorizationRole"
+          }
+        }
+      }
+    },
+    "authorizationRolesToPermissionRequest": {
+      "type": "object",
+      "properties": {
+        "permission_id": {
+          "type": "string"
+        },
+        "role_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "authorizationRolesToUserRequest": {
+      "type": "object",
+      "properties": {
+        "user_id": {
+          "type": "string"
+        },
+        "role_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "authorizationUsersToRoleRequest": {
+      "type": "object",
+      "properties": {
+        "role_id": {
+          "type": "string"
+        },
+        "user_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "scheduleEmpty": {
+      "type": "object"
+    },
+    "scheduleFare": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string",
+          "title": "name: Edo-Uselu to Lagos-Yaba via Toyota Hiace"
+        },
+        "route_id": {
+          "type": "string"
+        },
+        "vehicle_type_id": {
+          "type": "string",
+          "title": "a type of vehicle can be toyota hiace"
+        },
+        "tenant_id": {
+          "type": "string"
+        },
+        "price": {
+          "type": "string",
+          "format": "int64"
+        },
+        "created_at": {
+          "type": "string"
+        },
+        "updated_at": {
+          "type": "string"
+        }
+      }
+    },
+    "scheduleFareRequest": {
+      "type": "object",
+      "properties": {
+        "terminal_id": {
+          "type": "string"
+        },
+        "vehicle_type_id": {
+          "type": "string"
+        }
+      }
+    },
+    "scheduleFareResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string",
+          "title": "name: Edo-Uselu to Lagos-Yaba via Toyota Hiace"
+        },
+        "route": {
+          "$ref": "#/definitions/scheduleIdNamePair"
+        },
+        "price": {
+          "type": "string",
+          "format": "int64"
+        },
+        "created_at": {
+          "type": "string"
+        },
+        "updated_at": {
+          "type": "string"
+        }
+      }
+    },
+    "scheduleFares": {
+      "type": "object",
+      "properties": {
+        "values": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/scheduleFareResponse"
+          }
+        }
+      }
+    },
+    "scheduleId": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        }
+      }
+    },
+    "scheduleIdNamePair": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "scheduleRoute": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string",
+          "title": "eg Edo-Uselu to Lagos-Yaba"
+        },
+        "tenant_id": {
+          "type": "string"
+        },
+        "departure_terminal_id": {
+          "type": "string"
+        },
+        "arrival_terminal_id": {
+          "type": "string"
+        },
+        "created_at": {
+          "type": "string"
+        },
+        "updated_at": {
+          "type": "string"
+        }
+      }
+    },
+    "scheduleRouteRequest": {
+      "type": "object",
+      "properties": {
+        "departure_terminal_id": {
+          "type": "string"
+        },
+        "arrival_terminal_id": {
+          "type": "string"
+        }
+      }
+    },
+    "scheduleRoutes": {
+      "type": "object",
+      "properties": {
+        "values": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/scheduleRoute"
+          }
+        }
+      }
+    },
+    "scheduleSchedule": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "tenant_id": {
+          "type": "string"
+        },
+        "vehicle_id": {
+          "type": "string"
+        },
+        "price": {
+          "type": "string",
+          "format": "int64"
+        },
+        "departure_terminal_id": {
+          "type": "string"
+        },
+        "arrival_terminal_id": {
+          "type": "string"
+        },
+        "departure_time": {
+          "type": "string"
+        },
+        "arrival_time": {
+          "type": "string"
+        },
+        "created_at": {
+          "type": "string"
+        },
+        "updated_at": {
+          "type": "string"
+        }
+      },
+      "title": "A Schedule Resource"
+    },
+    "scheduleScheduleRequest": {
+      "type": "object",
+      "properties": {
+        "departure_terminal_id": {
+          "type": "string"
+        },
+        "arrival_terminal_id": {
+          "type": "string"
+        },
+        "vehicle_type_id": {
+          "type": "string"
+        }
+      }
+    },
+    "scheduleScheduleResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "vehicle": {
+          "$ref": "#/definitions/scheduleIdNamePair"
+        },
+        "vehicle_type": {
+          "$ref": "#/definitions/scheduleIdNamePair"
+        },
+        "price": {
+          "type": "string",
+          "format": "int64"
+        },
+        "departure_terminal": {
+          "$ref": "#/definitions/scheduleIdNamePair"
+        },
+        "arrival_terminal": {
+          "$ref": "#/definitions/scheduleIdNamePair"
+        },
+        "driver": {
+          "$ref": "#/definitions/scheduleIdNamePair"
+        },
+        "departure_time": {
+          "type": "string"
+        },
+        "arrival_time": {
+          "type": "string"
+        },
+        "created_at": {
+          "type": "string"
+        },
+        "updated_at": {
+          "type": "string"
+        }
+      }
+    },
+    "scheduleSchedules": {
+      "type": "object",
+      "properties": {
+        "values": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/scheduleScheduleResponse"
+          },
+          "title": "All schedules"
+        }
+      },
+      "title": "Response to ListSchedule"
+    },
+    "terminalEmpty": {
+      "type": "object"
+    },
+    "terminalId": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        }
+      }
+    },
+    "terminalTerminal": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "state_id": {
+          "type": "string"
+        },
+        "branch_manager_id": {
+          "type": "string"
+        },
+        "tenant_id": {
+          "type": "string"
+        },
+        "address": {
+          "type": "string"
+        },
+        "created_at": {
+          "type": "string"
+        },
+        "updated_at": {
+          "type": "string"
+        }
+      }
+    },
+    "terminalTerminalAssignRequest": {
+      "type": "object",
+      "properties": {
+        "manager_id": {
+          "type": "string"
+        },
+        "terminal_id": {
+          "type": "string"
+        }
+      }
+    },
+    "terminalTerminals": {
+      "type": "object",
+      "properties": {
+        "values": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/terminalTerminal"
+          }
+        }
+      }
+    }
+  }
+}
