@@ -1,0 +1,29 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: mock-server
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: mock-server
+        tier: mock
+        framework: express
+    spec:
+      containers:
+      - name: mock
+        image: gcr.io/entranic-bus/mock-server
+        ports:
+        - containerPort: 443
+        - containerPort: 80
+        env:
+          - name: NODE_ENV
+            value: production
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: 80
+            scheme: HTTP
+          initialDelaySeconds: 60
+          timeoutSeconds: 5
